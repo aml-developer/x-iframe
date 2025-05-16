@@ -1,14 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/x-iframe/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iframe Test</title>
-    <script type="module" crossorigin src="/x-iframe/assets/index-Cpx26Mt2.js"></script>
-    <link rel="stylesheet" crossorigin href="/x-iframe/assets/index-BZ-UHEk-.css">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Example</title>
+
+<style>
+
+    html, body {
+      margin: 0;
+      padding: 0;	
+      overflow-y: auto;	    
+    }
+
+    iframe {
+      width: 100vw;
+      height: 120vh;
+      height: 120lvh;	    
+      border: none;
+      display: block;
+    }	
+	
+</style>
+</head>
+<body>	
+	<div id="loader">Loading...</div>
+		<iframe 
+			id="myIframe"
+			src="https://emeademos.oak.trustx.com/web/trustweb?pt=TQ6OWOJB7TJPIFQYSU6T4ZAYEM" 
+			allow="camera; microphone; gyroscope; accelerometer"> 
+		</iframe>
+	<script>
+		
+		var iframe = document.getElementById("myIframe");
+		iframe.onload = function() {
+		    document.getElementById("loader").style.display = "none";
+		    iframe.style.display = "block";
+		};
+
+		window.addEventListener('message', (event) => {
+			if (!event.data || !event.data.event) return
+			switch (event.data.event) {
+				case 'webCompleted':
+					if (event.message) {
+						alert('Review')
+					} else alert('Process ended successfully')
+					break
+				case 'webTimeout':
+					alert('Session expired')
+					break
+				case 'error':
+					alert('Process ended with an error')
+					break
+				default:
+					console.log(event.data)
+			}
+		})
+	</script>
+ 
+
+</body>
 </html>
